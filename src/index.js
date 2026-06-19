@@ -84,9 +84,11 @@ function insertHeader(t, path, opts, header) {
   // this will add in the comment which was generated
   path.addComment('leading', `${opts.commentStart}${comment}${opts.commentEnd}`);
 
-  // the following two lines will add new lines below the comment which was injected
-  path.unshiftContainer('body', t.noop());
-  path.unshiftContainer('body', t.noop());
+  if (t.noop) {
+    // the following two lines will add new lines below the comment which was injected
+    path.unshiftContainer('body', t.noop());
+    path.unshiftContainer('body', t.noop());
+  }
 }
 
 function getLinesFromFile(file, opts) {
